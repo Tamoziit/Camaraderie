@@ -12,6 +12,7 @@ export const signup = async (req: Request, res: Response) => {
             email,
             password,
             mobileNo,
+            aadharNo,
             dob,
             age,
             gender,
@@ -27,7 +28,11 @@ export const signup = async (req: Request, res: Response) => {
             return;
         }
         if (mobileNo.length !== 10) {
-            res.status(400).json({ error: "Enter a valid Phone no." });
+            res.status(400).json({ error: "Enter a valid Mobile no." });
+            return;
+        }
+        if (aadharNo.length !== 12) {
+            res.status(400).json({ error: "Enter a valid Aadhar no." });
             return;
         }
         if (name.length < 2) {
@@ -67,6 +72,7 @@ export const signup = async (req: Request, res: Response) => {
             email,
             password: passwordHash,
             mobileNo,
+            aadharNo,
             dob,
             age,
             gender,
@@ -87,6 +93,7 @@ export const signup = async (req: Request, res: Response) => {
                 name: newUser.name,
                 email: newUser.email,
                 mobileNo: newUser.mobileNo,
+                aadharNo: newUser.aadharNo,
                 dob: newUser.dob,
                 age: newUser.age,
                 gender: newUser.gender,
@@ -105,6 +112,7 @@ export const signup = async (req: Request, res: Response) => {
                     name: newUser.name,
                     email: newUser.email,
                     mobileNo: newUser.mobileNo,
+                    aadharNo: newUser.aadharNo,
                     dob: newUser.dob,
                     age: newUser.age,
                     gender: newUser.gender,
@@ -116,6 +124,7 @@ export const signup = async (req: Request, res: Response) => {
                     otherProfession: newUser.otherProfession,
                     isVerified: newUser.isVerified,
                     archetype: newUser.archetype,
+                    intrinsicStrength: newUser.intrinsicStrength,
                     preferences: newUser.preferences,
                     token
                 });
@@ -149,6 +158,7 @@ export const login = async (req: Request, res: Response) => {
             name: user.name,
             email: user.email,
             mobileNo: user.mobileNo,
+            aadharNo: user.aadharNo,
             dob: user.dob,
             age: user.age,
             gender: user.gender,
@@ -167,6 +177,7 @@ export const login = async (req: Request, res: Response) => {
                 name: user.name,
                 email: user.email,
                 mobileNo: user.mobileNo,
+                aadharNo: user.aadharNo,
                 dob: user.dob,
                 age: user.age,
                 gender: user.gender,
@@ -178,6 +189,7 @@ export const login = async (req: Request, res: Response) => {
                 otherProfession: user.otherProfession,
                 isVerified: user.isVerified,
                 archetype: user.archetype,
+                intrinsicStrength: user.intrinsicStrength,
                 preferences: user.preferences,
                 token
             });

@@ -10,6 +10,7 @@ export interface SignupBody {
     email: string;
     password: string;
     mobileNo: string;
+    aadharNo: string;
     dob: string;
     age: number;
     gender: "M" | "F" | "O";
@@ -26,7 +27,10 @@ export interface LoginBody {
     password: string;
 }
 
-import { Types } from "mongoose";
+export interface Review {
+    rating: number;
+    message?: string | null;
+}
 
 export interface User {
     _id?: Types.ObjectId;
@@ -38,17 +42,18 @@ export interface User {
     dob: string;
     age: number;
     address: string;
-    profilePic?: string;
+    profilePic?: string | null;
     profession: "student" | "professional" | "other";
     institute?: string;
     company?: string;
     otherProfession?: string;
-    currentGroup?: Types.ObjectId;
+    currentGroup?: Types.ObjectId | null;
     totalTrips: Types.ObjectId[];
     isVerified: boolean;
     archetype: string;
+    intrinsicStrength: number;
     preferences: string[];
-    reviews?: string[];
+    reviews?: Review[];
     createdAt?: Date;
     updatedAt?: Date;
 }

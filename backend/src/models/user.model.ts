@@ -21,6 +21,12 @@ const UserSchema = new mongoose.Schema({
         max: 10,
         required: true
     },
+    aadharNo: {
+        type: String,
+        min: 12,
+        max: 12,
+        required: true
+    },
     gender: {
         type: String,
         enum: ["M", "F", "O"],
@@ -49,17 +55,17 @@ const UserSchema = new mongoose.Schema({
     },
     institute: {
         type: String,
-        default: "None",
+        default: "",
         min: 2
     },
     company: {
         type: String,
-        default: "None",
+        default: "",
         min: 2
     },
     otherProfession: {
         type: String,
-        default: "None",
+        default: "",
         min: 2
     },
     currentGroup: {
@@ -80,7 +86,12 @@ const UserSchema = new mongoose.Schema({
     },
     archetype: {
         type: String,
-        default: 'Exploring',
+        default: 'The Explorer',
+        required: true
+    },
+    intrinsicStrength: {
+        type: Number,
+        default: 7.0,
         required: true
     },
     preferences: [
@@ -91,7 +102,13 @@ const UserSchema = new mongoose.Schema({
     ],
     reviews: [
         {
-            type: String,
+            rating: {
+                type: Number,
+                required: true
+            },
+            message: {
+                type: String
+            }
         }
     ]
 }, { timestamps: true });
