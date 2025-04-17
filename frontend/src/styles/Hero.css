@@ -1,0 +1,161 @@
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  background: linear-gradient(135deg, #3a86ff, #4b70e2, #5d5ac6, #6e45aa);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  padding-top: 80px; /* Account for fixed header */
+}
+
+.hero-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2.5rem;
+  opacity: 0.9;
+}
+
+.search-container {
+  margin-bottom: 3rem;
+}
+
+.hero-cta {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.btn-signup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #ff6b6b;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-signup:hover {
+  background-color: #ff5252;
+}
+
+.search-box {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 200px;
+  position: relative;
+}
+
+.search-input .icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+}
+
+.search-input input,
+.search-input select {
+  width: 100%;
+  padding: 15px 15px 15px 45px;
+  border: none;
+  font-size: 1rem;
+  color: #333;
+}
+
+.search-input input:focus,
+.search-input select:focus {
+  outline: none;
+}
+
+.search-btn {
+  background-color: #3a86ff;
+  color: white;
+  border: none;
+  padding: 0 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.search-btn:hover {
+  background-color: #2563eb;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  color: white;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat h3 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #3a86ff;
+}
+
+.stat p {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .search-input {
+    flex: 100%;
+  }
+
+  .search-btn {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .hero-stats {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
