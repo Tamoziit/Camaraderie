@@ -25,29 +25,28 @@ const GroupSchema = new mongoose.Schema({
         required: true
     },
     startDate: {
-        type: Date,
+        type: String,
         required: true
     },
     endDate: {
-        type: Date,
+        type: String,
         required: true
     },
     transport: {
         mode: {
-            type: String,
-            required: true
+            type: String
+        },
+        name: {
+            type: String
         },
         pickup: {
-            type: String,
-            required: true
+            type: String
         },
         departure: {
-            type: Date,
-            required: true
+            type: String
         },
         arrival: {
-            type: Date,
-            required: true
+            type: String
         },
         PNR: {
             type: String
@@ -87,7 +86,7 @@ const GroupSchema = new mongoose.Schema({
                 required: true
             },
             date: {
-                type: Date,
+                type: String,
                 required: true
             },
             isDone: {

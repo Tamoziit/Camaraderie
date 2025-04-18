@@ -63,3 +63,19 @@ declare module "express" {
         user?: User;
     }
 }
+
+export interface TransportProps {
+    mode?: string | null;
+    name?: string | null;
+    pickup?: string | null;
+    departure?: string | null;
+    arrival?: string | null;
+    PNR?: string | null;
+}
+
+export interface GroupCreationProps {
+    destination: string;
+    startDate: string;
+    endDate: string;
+    transport?: TransportProps | null;
+}
