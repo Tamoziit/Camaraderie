@@ -79,3 +79,9 @@ export interface GroupCreationProps {
     endDate: string;
     transport?: TransportProps | null;
 }
+
+export interface ItineraryProps {
+    name: string;
+    details: string;
+    date: string;
+}
