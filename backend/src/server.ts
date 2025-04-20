@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import helmet from "helmet";
 import morgan from "morgan";
 
+import { app, server } from "./socket/socket";
 import { client } from "./redis/client";
 import connectToMongoDB from "./db/connectToMongoDB";
 import adminRoutes from "./routes/admin.routes";
@@ -19,7 +20,6 @@ import budgetSplitterRoutes from "./routes/budget.routes";
 
 const PORT = process.env.PORT || 3000;
 
-const app = express();
 const corOpts = {
     origin: '*',
     methods: [
@@ -57,7 +57,7 @@ app.use("/api/v1/personal", personalRoutes);
 app.use("/api/v1/reviews", reviewRoutes);
 app.use("/api/v1/budget-splitter", budgetSplitterRoutes);
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Server is running on Port: ${PORT}`);
     connectToMongoDB();
 
