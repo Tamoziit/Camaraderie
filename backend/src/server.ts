@@ -15,6 +15,7 @@ import profileRoutes from "./routes/profile.routes";
 import groupRoutes from "./routes/group.routes";
 import personalRoutes from "./routes/personal.routes";
 import reviewRoutes from "./routes/reviews.routes";
+import budgetSplitterRoutes from "./routes/budget.routes";
 
 const PORT = process.env.PORT || 3000;
 
@@ -54,6 +55,7 @@ app.use("/api/v1/profile", profileRoutes);
 app.use("/api/v1/groups", groupRoutes);
 app.use("/api/v1/personal", personalRoutes);
 app.use("/api/v1/reviews", reviewRoutes);
+app.use("/api/v1/budget-splitter", budgetSplitterRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on Port: ${PORT}`);

@@ -86,7 +86,20 @@ export interface ItineraryProps {
     date: string;
 }
 
+export interface ItineraryItem {
+    name: string;
+    details: string;
+    date: string;
+    _id: Types.ObjectId,
+    isDone: boolean;
+}
+
 export interface ReviewProps { 
     rating: number;
     message?: string | null;
+}
+
+export interface BudgetSplitterProps {
+    expenditure: number;
+    received:  number;
 }

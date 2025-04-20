@@ -3,6 +3,11 @@ import User from "../models/user.model";
 import Group from "../models/group.model";
 import Community from "../models/community.model";
 import { ItineraryProps } from "../types";
+import { Types } from "mongoose";
+
+interface ItineraryMarkProps {
+    id: Types.ObjectId;
+}
 
 export const getMyTrips = async (req: Request, res: Response) => {
     try {
@@ -156,6 +161,43 @@ export const updateItinerary = async (req: Request, res: Response) => {
         trip.iternary.push(event);
         await trip.save();
 
+        res.status(201).json(trip.iternary);
+    } catch (error) {
+        console.error("Error in updateItinerary controller:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+}
+
+export const markItineraryDone = async (req: Request, res: Response) => {
+    try {
+        const groupId = req.params.id;
+        const { id }: ItineraryMarkProps = req.body;
+        const trip = await Group.findById(groupId);
+
+        if (!trip) {
+            res.status(400).json({ error: "Cannot find this trip" });
+            return;
+        }
+        if (!req.user?._id) {
+            res.status(400).json({ error: "Cannot find User" });
+            return;
+        }
+        if (!trip.members.some((member: any) => member._id.toString() === req.user!._id!.toString())) {
+            res.status(400).json({ error: "You are not a member of this Group" });
+            return;
+        }
+
+        const itineraryItem = trip.iternary.find(
+            (item: any) => item._id.toString() === id
+        );
+
+        if (!itineraryItem) {
+            res.status(400).json({ error: "Itinerary item not found" });
+            return;
+        }
+
+        itineraryItem.isDone = true;
+        await trip.save();
         res.status(200).json(trip.iternary);
     } catch (error) {
         console.error("Error in updateItinerary controller:", error);
