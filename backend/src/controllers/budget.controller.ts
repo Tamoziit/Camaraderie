@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Group from "../models/group.model";
 import { BudgetSplitterProps } from "../types";
+import calculateBudgetSplitter from "../utils/calculateBudgetSplitter";
 
 export const updateSplitter = async (req: Request, res: Response) => {
     try {
@@ -28,8 +29,9 @@ export const updateSplitter = async (req: Request, res: Response) => {
         }
 
         const budgetSplitterItem = trip.budgetSplitter.find(
-            (item: any) => item.userId.toString() === req.user!._id!.toString()
+            (item: any) => item.userId._id.toString() === req.user!._id!.toString()
         );
+
         if (!budgetSplitterItem) {
             res.status(400).json({ error: "User not found" });
             return;
@@ -39,7 +41,10 @@ export const updateSplitter = async (req: Request, res: Response) => {
         budgetSplitterItem.received = budgetSplitterItem.received + received;
         await trip.save();
 
-        res.status(200).json(trip.budgetSplitter);
+        const updatedSplitter = calculateBudgetSplitter(
+            trip.budgetSplitter.map((item: any) => item.toObject())
+        );
+        res.status(200).json(updatedSplitter);
     } catch (error) {
         console.error("Error in updateSplitter controller:", error);
         res.status(500).json({ error: "Internal Server Error" });
@@ -60,16 +65,19 @@ export const getSplitter = async (req: Request, res: Response) => {
         }
         if (!req.user?._id) {
             res.status(400).json({ error: "Cannot find User" });
-            return;
+            return
         }
         if (!trip.members.some((member: any) => member._id.toString() === req.user!._id!.toString())) {
             res.status(400).json({ error: "You are not a member of this Group" });
             return;
         }
 
-        res.status(200).json(trip.budgetSplitter);
+        const updatedSplitter = calculateBudgetSplitter(
+            trip.budgetSplitter.map((item: any) => item.toObject())
+        );
+        res.status(200).json(updatedSplitter);
     } catch (error) {
         console.error("Error in getSplitter controller:", error);
         res.status(500).json({ error: "Internal Server Error" });
     }
-}
+};

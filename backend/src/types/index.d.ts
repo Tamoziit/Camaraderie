@@ -94,12 +94,24 @@ export interface ItineraryItem {
     isDone: boolean;
 }
 
-export interface ReviewProps { 
+export interface ReviewProps {
     rating: number;
     message?: string | null;
 }
 
 export interface BudgetSplitterProps {
     expenditure: number;
-    received:  number;
+    received: number;
+}
+
+export interface BudgetSplitterItem {
+    userId: {
+        _id: Types.ObjectId,
+        name: string;
+        email: string;
+        profilePic: string;
+    },
+    expenditure: number;
+    received: number;
+    _id: Types.ObjectId;
 }
