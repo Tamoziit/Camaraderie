@@ -14,6 +14,7 @@ import authRoutes from "./routes/auth.routes";
 import profileRoutes from "./routes/profile.routes";
 import groupRoutes from "./routes/group.routes";
 import personalRoutes from "./routes/personal.routes";
+import reviewRoutes from "./routes/reviews.routes";
 
 const PORT = process.env.PORT || 3000;
 
@@ -52,6 +53,7 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/profile", profileRoutes);
 app.use("/api/v1/groups", groupRoutes);
 app.use("/api/v1/personal", personalRoutes);
+app.use("/api/v1/reviews", reviewRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on Port: ${PORT}`);

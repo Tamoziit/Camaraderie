@@ -114,7 +114,11 @@ const GroupSchema = new mongoose.Schema({
                 required: true
             }
         }
-    ]
+    ],
+    isDone: {
+        type: Boolean,
+        default: false
+    }
 }, { timestamps: true });
 
 const Group = mongoose.model("Group", GroupSchema);

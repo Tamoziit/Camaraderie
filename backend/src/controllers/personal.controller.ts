@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import User from "../models/user.model";
 import Group from "../models/group.model";
-import { client } from "../redis/client";
 import Community from "../models/community.model";
 import { ItineraryProps } from "../types";
 

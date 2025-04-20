@@ -85,3 +85,8 @@ export interface ItineraryProps {
     details: string;
     date: string;
 }
+
+export interface ReviewProps { 
+    rating: number;
+    message?: string | null;
+}
