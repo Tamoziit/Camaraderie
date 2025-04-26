@@ -1,25 +1,34 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import './App.css'
+import { useAuthContext } from './context/AuthContext'
+import { Toaster } from 'react-hot-toast'
+
 import Header from './components/Header'
-import Home from './components/Home'
-import SignUp from './components/SignUp'
 import Footer from './components/Footer'
+import Landing from './pages/landing/Landing'
+import SignUp from './pages/auth/SignUp'
+import Login from './pages/auth/Login'
+import Home from './pages/home/Home'
 
 function App() {
+  const { authUser } = useAuthContext();
+
   return (
-    <Router>
-      <div className="app">
-        <Header />
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/signup" element={<SignUp />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
+    <div className="app">
+      <Header />
+      <main>
+        <Routes>
+          <Route path="/" element={authUser ? <Navigate to="/home" /> : <Landing />} />
+          <Route path="/login" element={authUser ? <Navigate to="/home" /> : <Login />} />
+          <Route path="/signup" element={authUser ? <Navigate to="/home" /> : <SignUp />} />
+          <Route path="/home" element={authUser ? <Home /> : <Navigate to={"/"} />} />
+        </Routes>
+
+        <Toaster />
+      </main>
+      <Footer />
+    </div>
   )
 }
 
-export default App
+export default App;

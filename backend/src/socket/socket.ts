@@ -34,6 +34,8 @@ io.on("connection", (socket) => {
 
             if (!groupUserMap[groupId]) groupUserMap[groupId] = new Set();
             groupUserMap[groupId].add(userId);
+
+            socket.to(groupId).emit("receive-message", `${userId} joined the group`);
         });
 
         // Handle sending a message to a group
