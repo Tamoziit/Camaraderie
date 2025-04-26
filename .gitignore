@@ -137,3 +137,5 @@ dist
 .pnp.*
 .vscode/
 tests/
+__pycache__/
+*.ini

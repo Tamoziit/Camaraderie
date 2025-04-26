@@ -69,7 +69,8 @@ label {
 input[type="text"],
 input[type="email"],
 input[type="password"],
-input[type="date"] {
+input[type="date"],
+input[type="datetime-local"] {
   padding: 0.8rem;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -88,7 +89,8 @@ select {
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus,
-input[type="date"]:focus {
+input[type="date"]:focus,
+input[type="datetime-local"]:focus {
   border-color: #3a86ff;
   outline: none;
 }

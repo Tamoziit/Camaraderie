@@ -9,6 +9,8 @@ import Landing from './pages/landing/Landing'
 import SignUp from './pages/auth/SignUp'
 import Login from './pages/auth/Login'
 import Home from './pages/home/Home'
+import CreateGroup from './pages/groups/CreateGroup'
+import CurrentTrip from './pages/trips/CurrentTrip'
 
 function App() {
   const { authUser } = useAuthContext();
@@ -22,6 +24,8 @@ function App() {
           <Route path="/login" element={authUser ? <Navigate to="/home" /> : <Login />} />
           <Route path="/signup" element={authUser ? <Navigate to="/home" /> : <SignUp />} />
           <Route path="/home" element={authUser ? <Home /> : <Navigate to={"/"} />} />
+          <Route path="/group/create-group" element={authUser ? <CreateGroup /> : <Navigate to={"/"} />} />
+          <Route path="/trips/current-trip" element={authUser ? <CurrentTrip /> : <Navigate to={"/"} />} />
         </Routes>
 
         <Toaster />

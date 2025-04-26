@@ -32,7 +32,19 @@ export const getMyCurrentTrip = async (req: Request, res: Response) => {
     try {
         const user = await User.findById(req.user?._id).populate({
             path: "currentGroup",
-            model: Group
+            model: Group,
+            populate: [
+                {
+                    path: "admin",
+                    model: "User",
+                    select: "_id name email profilePic"
+                },
+                {
+                    path: "members",
+                    model: "User",
+                    select: "_id name email profilePic"
+                }
+            ]
         });
 
         if (!user || !user.currentGroup) {
