@@ -5,7 +5,7 @@ import { RiMoneyDollarCircleFill } from "react-icons/ri"
 
 const ActionCards = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 lg:gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 lg:gap-6 !px-4 md:!px-0">
       <ActionCard
         title="Community"
         icon={<TbBuildingCommunity className="text-3xl mr-2" />}
@@ -40,7 +40,7 @@ const ActionCard = ({ title, icon, bgGradient, imageSrc, buttonText }) => {
       whileTap={{ scale: 0.95 }}
       className={`bg-gradient-to-br ${bgGradient} rounded-2xl overflow-hidden shadow-lg flex flex-col`}
     >
-      <div className="relative h-32 lg:h-40 overflow-hidden">
+      <div className="relative h-40 md:h-32 lg:h-40 overflow-hidden">
         <img
           src={imageSrc || "/placeholder.svg"}
           alt={title}

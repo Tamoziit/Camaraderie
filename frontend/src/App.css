@@ -14,8 +14,10 @@
 }
 
 main {
-  margin-top: 80px; /* Account for fixed header */
-  min-height: calc(100vh - 80px - 300px); /* Subtract header and approximate footer height */
+  margin-top: 80px;
+  /* Account for fixed header */
+  min-height: calc(100vh - 80px - 300px);
+  /* Subtract header and approximate footer height */
 }
 
 /* Global Styles */
@@ -41,4 +43,33 @@ main {
 
 .btn-primary:hover {
   background-color: #2563eb;
+}
+
+.btn-secondary {
+  background-color: white;
+  color: #3a86ff;
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 500;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border: 2px solid #3a86ff;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background-color: #3a86ff;
+  color: white;
+}
+
+.user-dashboard {
+  padding: 80px 0;
+  background-color: var(--light-color);
+}
+
+.dashboard-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px;
 }
