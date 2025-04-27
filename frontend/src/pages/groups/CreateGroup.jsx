@@ -148,34 +148,22 @@ const CreateGroup = () => {
 									</select>
 								</div>
 
+
 								<div className="form-group">
 									<label>
-										<FaLocationDot className="form-icon" />
-										Destination
+										<FaUmbrellaBeach className="form-icon" />
+										Transport Name
 									</label>
 									<input
 										type="text"
 										name="transport.name"
 										value={formData.transport.name}
 										onChange={handleChange}
-										placeholder='(eg: Ahmedabad, Delhi, etc.)'
+										placeholder='Enter your Transport name (eg: Indigo (AMD-KOL)'
 									/>
 								</div>
 							</div>
 
-							<div className="form-group">
-								<label>
-									<FaUmbrellaBeach className="form-icon" />
-									Transport Name
-								</label>
-								<input
-									type="text"
-									name="transport.name"
-									value={formData.transport.name}
-									onChange={handleChange}
-									placeholder='Enter your Transport name (eg: Indigo (AMD-KOL)'
-								/>
-							</div>
 
 							<div className="form-group">
 								<label>
@@ -237,7 +225,7 @@ const CreateGroup = () => {
 						className="btn-signup !items-center !justify-center !flex !font-bold !text-lg"
 						disabled={loading}
 					>
-						{loading ? <Spinner /> : "Create Account"}
+						{loading ? <Spinner /> : "Create Group"}
 					</button>
 				</form>
 			</div >

@@ -68,10 +68,6 @@ function handleInputErrors({
         toast.error("Please fill all required fields");
         return false;
     }
-    if (transport.mode && !transport.destination) {
-        toast.error("Transport destination is required");
-        return false;
-    }
     if (transport.mode && !transport.name) {
         toast.error("Transport name is required");
         return false;
