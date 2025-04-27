@@ -7,6 +7,8 @@ from dotenv import load_dotenv
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains import LLMChain, SequentialChain
+from archetypes import archetypes
+
 
 load_dotenv()
 
@@ -18,49 +20,7 @@ llm = ChatGoogleGenerativeAI(
     max_output_tokens=100
 )
 
-example_archetypes = [
-    {
-        "archetype": "The Explorer",
-        "paragraph": (
-            "You love to discover hidden gems, wander off the beaten path, and embrace spontaneity. "
-            "Your flexibility and curiosity drive every journey."
-        ),
-        "intent": "discover and explore new places"
-    },
-    {
-        "archetype": "The Planner",
-        "paragraph": (
-            "You meticulously research, plan every detail, and value structure. "
-            "Your well‑crafted itineraries ensure smooth travels."
-        ),
-        "intent": "organize and optimize travel details"
-    },
-    {
-        "archetype": "The Social Butterfly",
-        "paragraph": (
-            "You thrive in social settings, love meeting new people, and bring energy to every group. "
-            "Connecting with others is your primary goal."
-        ),
-        "intent": "socialize and network with fellow travelers"
-    },
-    {
-        "archetype": "The Adventurer",
-        "paragraph": (
-            "You seek adrenaline through extreme sports, challenging hikes, and bold experiences. "
-            "Risk‑taking and high energy define your trips."
-        ),
-        "intent": "challenge personal limits and seek thrills"
-    },
-    {
-        "archetype": "The Cultural Connoisseur",
-        "paragraph": (
-            "You immerse yourself in local art, history, and traditions. "
-            "Intellectual depth and authentic interactions enrich your travels."
-        ),
-        "intent": "immerse in culture and heritage"
-    }
-]
-example_archetypes_json = json.dumps(example_archetypes)
+archetypes_json = json.dumps(archetypes)
 
 travel_assistant_prompt = ChatPromptTemplate.from_template(
     """
@@ -124,7 +84,7 @@ async def classify_user(user_profile: UserProfile):
     
     result = archetype_classifier({
         "user_profile_json": user_profile_json,
-        "archetypes_json": example_archetypes_json
+        "archetypes_json": archetypes_json
     })
 
     raw_classification = result["classification"]

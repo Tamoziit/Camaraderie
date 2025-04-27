@@ -1,10 +1,7 @@
 import { Request, Response } from "express";
 import User from "../models/user.model";
 import { archetypes } from "../constants/constants";
-
-interface ArcheType {
-    archetype: string;
-}
+import { ArchetypeProps, ArchetypeResponse } from "../types";
 
 export const updateProfile = async (req: Request, res: Response) => {
     try {
@@ -46,16 +43,38 @@ export const updateProfile = async (req: Request, res: Response) => {
 
 export const getArchetype = async (req: Request, res: Response) => {
     try {
-        const { archetype }: ArcheType = req.body;
+        const {
+            likes,
+            dislikes,
+            travelPreferences,
+            canTolerate,
+            cannotTolerate
+        }: ArchetypeProps = req.body;
         const user = await User.findById(req.user?._id);
         if (!user) {
             res.status(400).json({ error: "User not found" });
             return;
         }
+        const url = process.env.ML_URL;
+
+        const response = await fetch(`${url}/classify`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                likes,
+                dislikes,
+                travelPreferences,
+                canTolerate,
+                cannotTolerate
+            })
+        });
+        const data = await response.json() as ArchetypeResponse;
 
         let message;
         archetypes.forEach((item) => {
-            if (item.archetype === archetype) {
+            if (item.archetype === data.archetype) {
                 user.archetype = item.archetype;
                 user.intrinsicStrength = item.intrinsicStrength;
                 message = item.message;

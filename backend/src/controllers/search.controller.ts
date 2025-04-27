@@ -44,13 +44,6 @@ export const searchGroups = async (req: Request, res: Response) => {
             // Intrinsic Strength check (±1.5 tolerance)
             const isStrengthMatch = Math.abs(group.intrinsicStrength - user.intrinsicStrength) <= 1.5;
 
-            console.log({
-                isDestinationMatch,
-                isDateMatch,
-                isTransportMatch,
-                isStrengthMatch
-            })
-
             return isDestinationMatch && isDateMatch && isTransportMatch && isStrengthMatch;
         });
 

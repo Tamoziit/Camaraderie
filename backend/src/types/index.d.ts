@@ -115,3 +115,20 @@ export interface BudgetSplitterItem {
     received: number;
     _id: Types.ObjectId;
 }
+
+export interface ArchetypeProps {
+    likes: string[];
+    dislikes: string[];
+    travelPreferences: {
+        destinations: string[],
+        groupSize: number;
+        pace: "fast" | "planned" | "slow" | "spontaneous",
+    };
+    canTolerate: string[];
+    cannotTolerate: string[];
+}
+
+export interface ArchetypeResponse {
+    archetype: "The Explorer" | "The Planner" | "The Social Butterfly" | "The Adventurer" | "The Cultural Connoisseur";
+    confidence: number;
+}
