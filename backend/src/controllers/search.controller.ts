@@ -44,6 +44,13 @@ export const searchGroups = async (req: Request, res: Response) => {
             // Intrinsic Strength check (±1.5 tolerance)
             const isStrengthMatch = Math.abs(group.intrinsicStrength - user.intrinsicStrength) <= 1.5;
 
+            console.log({
+                isDestinationMatch,
+                isDateMatch,
+                isTransportMatch,
+                isStrengthMatch
+            });
+
             return isDestinationMatch && isDateMatch && isTransportMatch && isStrengthMatch;
         });
 
@@ -53,3 +60,27 @@ export const searchGroups = async (req: Request, res: Response) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 };
+
+export const suggestions = async (req: Request, res: Response) => {
+    try {
+        const user = await User.findById(req.user?._id);
+        if (!user) {
+            res.status(400).json({ message: "User not found" });
+            return;
+        }
+
+        const groups = await Group.find({
+            _id: { $nin: user.totalTrips },
+            isDone: false
+        }).populate({
+            path: "admin",
+            model: User,
+            select: "_id name email profilePic"
+        });
+
+        res.status(200).json(groups);
+    } catch (error) {
+        console.log("Error in suggestions controller", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+}

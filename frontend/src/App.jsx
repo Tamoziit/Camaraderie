@@ -12,6 +12,7 @@ import Home from './pages/home/Home'
 import CreateGroup from './pages/groups/CreateGroup'
 import CurrentTrip from './pages/trips/CurrentTrip'
 import Trip from './pages/trips/Trip'
+import Search from './pages/search/Search'
 
 function App() {
   const { authUser } = useAuthContext();
@@ -28,6 +29,7 @@ function App() {
           <Route path="/group/create-group" element={authUser ? <CreateGroup /> : <Navigate to={"/"} />} />
           <Route path="/trips/current-trip" element={authUser ? <CurrentTrip /> : <Navigate to={"/"} />} />
           <Route path="/trips/my-trips/:id" element={authUser ? <Trip /> : <Navigate to={"/"} />} />
+          <Route path="/search" element={authUser ? <Search /> : <Navigate to={"/"} />} />
         </Routes>
 
         <Toaster />

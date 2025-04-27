@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaCalendarAlt, FaMapMarkerAlt, FaClock, FaUsers, FaPlane, FaChevronUp, FaPaperPlane, FaQrcode } from 'react-icons/fa';
-import { FaLocationDot, FaUmbrellaBeach } from "react-icons/fa6";
+import { FaUmbrellaBeach } from "react-icons/fa6";
 import { MdFlightTakeoff } from "react-icons/md";
 import { CiCirclePlus } from "react-icons/ci";
 import "../../styles/SignUp.css"
@@ -159,7 +159,7 @@ const CreateGroup = () => {
 										name="transport.name"
 										value={formData.transport.name}
 										onChange={handleChange}
-										placeholder='Enter your Transport name (eg: Indigo (AMD-KOL)'
+										placeholder='eg: Indigo (AMD-KOL)'
 									/>
 								</div>
 							</div>
