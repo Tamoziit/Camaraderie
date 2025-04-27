@@ -1,11 +1,12 @@
 import { motion } from "framer-motion"
 import { FaUser } from "react-icons/fa"
 
-const MembersTab = ({ members, adminId }) => {
-	console.log(members)
+const MembersTab = ({ members, adminId, intrinsicStrength }) => {
 	return (
-		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-4 overflow-hidden">
+		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="overflow-hidden flex flex-col !mt-2">
 			<span className="text-lg font-semibold">Trip Members ({members.length})</span>
+			<span className="text-base font-semibold text-gray-600">Intrinsic Strength: {intrinsicStrength}</span>
+
 			{members && members.length > 0 ? (
 				members.map((member) => (
 					<motion.div

@@ -8,6 +8,7 @@ import TripTabs from "../../components/TripComponents/TripTabs";
 import TripDetails from "../../components/TripComponents/TripDetails";
 import ActionCards from "../../components/TripComponents/ActionCards";
 import useGetTripById from "../../hooks/useGetTripById";
+import useViewRequests from "../../hooks/useViewRequests";
 
 const containerVariants = {
     hidden: { opacity: 0 },
@@ -35,14 +36,22 @@ const Trip = () => {
     const { id } = useParams();
     const [trip, setTrip] = useState(null);
     const { loading, getTrip } = useGetTripById();
+    const [requests, setRequets] = useState([]);
+    const { loading: fetching, viewRequests } = useViewRequests();
 
     const fetchTrip = async () => {
         const data = await getTrip(id);
         setTrip(data)
     }
 
+    const fetchRequests = async () => {
+        const data = await viewRequests(id);
+        setRequets(data)
+    }
+
     useEffect(() => {
-        fetchTrip()
+        fetchTrip();
+        fetchRequests();
     }, []);
 
     if (loading) {
@@ -71,7 +80,8 @@ const Trip = () => {
                             members={trip.members}
                             admin={trip.admin}
                             transport={trip.transport}
-                            requests={trip.requests}
+                            requests={requests}
+                            intrinsicStrength={trip.intrinsicStrength}
                         />
                     </motion.div>
 

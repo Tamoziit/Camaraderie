@@ -6,7 +6,7 @@ import MembersTab from "./MembersTab"
 import TransportTab from "./TransportTab"
 import RequestsTab from "./RequestsTab"
 
-const TripTabs = ({ members, admin, transport, requests }) => {
+const TripTabs = ({ members, admin, transport, requests, intrinsicStrength }) => {
 	const [activeTab, setActiveTab] = useState("members")
 
 	return (
@@ -39,7 +39,7 @@ const TripTabs = ({ members, admin, transport, requests }) => {
 			</div>
 
 			<div className="p-4">
-				{activeTab === "members" && <MembersTab members={members} adminId={admin?._id} />}
+				{activeTab === "members" && <MembersTab members={members} adminId={admin?._id} intrinsicStrength={intrinsicStrength} />}
 				{activeTab === "details" && <TransportTab transport={transport} />}
 				{activeTab === "requests" && <RequestsTab requests={requests} />}
 			</div>

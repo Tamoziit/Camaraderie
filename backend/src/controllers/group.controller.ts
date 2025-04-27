@@ -205,6 +205,18 @@ export const acceptJoinRequest = async (req: Request, res: Response) => {
         user.totalTrips.push(group._id);
         user.currentGroup = group._id;
 
+        // weighted mean of intrinsic strengths
+        const allMemberIds = group.members;
+        const allMembers = await User.find({ _id: { $in: allMemberIds } }, "intrinsicStrength");
+
+        const totalStrength = allMembers.reduce((sum, member) => {
+            return sum + (member.intrinsicStrength || 0);
+        }, 0);
+
+        const avgIntrinsicStrength = allMembers.length > 0 ? totalStrength / allMembers.length : 0;
+
+        group.intrinsicStrength = Number(avgIntrinsicStrength.toFixed(2));
+
         await Promise.all([community.save(), group.save(), user.save()]);
         res.status(200).json({
             requests: group.requests,

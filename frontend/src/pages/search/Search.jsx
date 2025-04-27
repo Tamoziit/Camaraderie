@@ -19,6 +19,7 @@ const Search = () => {
 	const [suggestedGroups, setSuggestedGroups] = useState([]);
 	const { loading, search } = useGetSearch();
 	const { loading: fetching, suggestions } = useGetSuggestions();
+	const baseUrl = import.meta.env.VITE_BASE_URL;
 
 	const fetchSuggestions = async () => {
 		const data = await suggestions();
@@ -155,16 +156,23 @@ const Search = () => {
 				<span className="text-2xl font-bold text-gray-700">Suggested Groups</span>
 				<div className="h-[0.7px] bg-gray-300 !mt-4" />
 
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 !mt-6">
-					{suggestedGroups?.length > 0 ? (
-						suggestedGroups?.map((suggestedGroup, _idx) => (
-							<SuggestedTripCard
-								key={_idx}
-								trip={suggestedGroup}
-							/>
-						))
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 !mt-6 !w-full">
+					{loading || fetching ? (
+						<div className="!flex !w-full items-center justify-center">
+							<Spinner />
+						</div>
 					) : (
-						<span className="text-gray-500 italic !mt-5">No Search Results matches your requirements</span>
+						suggestedGroups?.length > 0 ? (
+							suggestedGroups?.map((suggestedGroup, _idx) => (
+								<SuggestedTripCard
+									key={_idx}
+									trip={suggestedGroup}
+									url={`${baseUrl}/search/${suggestedGroup._id}`}
+								/>
+							))
+						) : (
+							<span className="text-gray-500 italic !mt-5">No Search Results matches your requirements</span>
+						)
 					)}
 				</div>
 			</div>

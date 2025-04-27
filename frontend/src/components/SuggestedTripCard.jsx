@@ -3,12 +3,12 @@ import "../styles/Trips.css";
 import formatDate from "../utils/formatDate";
 import getTransportIcon from "../utils/iconUtil";
 
-const SuggestedTripCard = ({ trip }) => {
+const SuggestedTripCard = ({ trip, url }) => {
     const navigate = useNavigate();
     const baseUrl = import.meta.env.VITE_BASE_URL;
 
     return (
-        <div className="home-trip-card">
+        <div className="home-trip-card !shadow-lg">
             <div className="trip-image">
                 <img src="https://images.unsplash.com/photo-1530521954074-e64f6810b32d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Bali Trip" />
                 <div className="trip-date">{formatDate(trip.startDate)} - {formatDate(trip.endDate)}</div>
@@ -39,7 +39,7 @@ const SuggestedTripCard = ({ trip }) => {
 
                 <div className="flex items-center gap-2 !mb-5">
                     <img
-                        className="w-12 h-12 rounded-full object-cover object-center border-2 border-blue-600"
+                        className="size-12 rounded-full object-cover object-center border-2 border-blue-600"
                         src={trip.admin?.profilePic || "/placeholderImg.png"}
                         alt="Profile"
                     />
@@ -52,7 +52,7 @@ const SuggestedTripCard = ({ trip }) => {
 
 
                 <div className="trip-footer">
-                    <button className="trip-action-btn">View Details</button>
+                    <button className="trip-action-btn" onClick={() => navigate(url.replace(baseUrl, ''))}>View Details</button>
                 </div>
             </div>
         </div>

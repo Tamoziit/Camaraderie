@@ -67,12 +67,12 @@ export const getTripbyId = async (req: Request, res: Response) => {
             {
                 path: "admin",
                 model: "User",
-                select: "_id name email profilePic"
+                select: "_id name email profilePic reviews"
             },
             {
                 path: "members",
                 model: "User",
-                select: "_id name email profilePic"
+                select: "_id name email profilePic reviews totalTrips"
             }
         ]);
 
