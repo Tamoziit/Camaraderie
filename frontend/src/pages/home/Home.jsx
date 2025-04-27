@@ -3,13 +3,19 @@ import { useAuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import ProfileTab from "../../components/home/ProfileTab";
 import useGetMyTrips from "../../hooks/useGetMyTrips";
+import useGetMyCurrentTrip from "../../hooks/useGetMyCurrentTrip"
+import TripCard from "../../components/TripCard";
+import Spinner from "../../components/Spinner";
 
 const Home = () => {
   const [greeting, setGreeting] = useState('Find Your Perfect Travel Buddy');
   const { authUser } = useAuthContext();
   const navigate = useNavigate();
   const { loading, myTrips } = useGetMyTrips();
+  const { loading: fetching, myCurrTrip } = useGetMyCurrentTrip();
   const [trips, setTrips] = useState([]);
+  const [currTrip, setCurrTrip] = useState(null);
+  const baseUrl = import.meta.env.VITE_BASE_URL;
 
   useEffect(() => {
     const now = new Date();
@@ -26,14 +32,18 @@ const Home = () => {
 
   const getMyTrips = async () => {
     const data = await myTrips();
-    console.log(data)
     setTrips(data);
   }
 
+  const getMyCurrTrip = async () => {
+    const data = await myCurrTrip();
+    setCurrTrip(data);
+  }
+
   useEffect(() => {
+    getMyCurrTrip();
     getMyTrips();
   }, []);
-  console.log(trips)
 
   return (
     <>
@@ -69,14 +79,58 @@ const Home = () => {
       </section>
 
       <section className="user-dashboard">
-        <div className="container">
-          <div className="dashboard-layout">
+        <div className="container flex flex-col md:flex-row !justify-between gap-10 lg:gap-20">
+          <div>
             <ProfileTab
               trips={trips.length}
             />
           </div>
+
+          <div className="flex flex-col space-y-5 !w-full">
+            <div className="flex flex-col !space-y-3 !w-full lg:!w-[70%]">
+              <span className="text-2xl font-semibold text-gray-700">Current Trip</span>
+              {fetching ? (
+                <Spinner />
+              ) : (
+                currTrip ? (
+                  <TripCard
+                    trip={currTrip}
+                    url={`${baseUrl}/trips/current-trip`}
+                  />
+                ) : (
+                  <div>
+                    <p className="text-gray-500">No current trips available</p>
+                  </div>
+                )
+              )}
+            </div>
+
+          </div>
         </div>
       </section>
+
+      <div className="flex w-full !px-9 lg:!px-20 flex-col !-mt-10 !space-y-3 bg-gray-50">
+        <span className="text-2xl font-semibold text-gray-700">Previous Trips</span>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 !w-full !mb-10 bg-gray-50">
+            {trips.filter((trip) => trip._id !== currTrip?._id).length === 0 ? (
+              <p className="text-gray-500">No trips available</p>
+            ) : (
+              trips
+                .filter((trip) => trip._id !== currTrip?._id)
+                .map((trip, _idx) => (
+                  <TripCard
+                    key={_idx}
+                    trip={trip}
+                    url={`${baseUrl}/trips/my-trips/${trip._id}`}
+                  />
+                ))
+            )}
+          </div>
+        )}
+      </div>
     </>
   )
 }

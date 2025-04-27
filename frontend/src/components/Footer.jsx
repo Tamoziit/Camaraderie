@@ -7,11 +7,11 @@ const Footer = () => {
       <div className="container">
         <div className="footer-content">
           <div className="footer-section about">
-            <h2>TravelBuddy</h2>
+            <h2>Camaraderie</h2>
             <p>Connecting travelers around the world based on preferences, budgets, and itineraries.</p>
             <div className="contact">
               <p><FaPhone /> &nbsp; +1 234 567 8900</p>
-              <p><FaEnvelope /> &nbsp; info@travelbuddy.com</p>
+              <p><FaEnvelope /> &nbsp; info@camaraderie.com</p>
               <p><FaMapMarkerAlt /> &nbsp; 123 Travel Street, Adventure City</p>
             </div>
             <div className="socials">
@@ -45,7 +45,7 @@ const Footer = () => {
         </div>
         
         <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} TravelBuddy | All Rights Reserved</p>
+          <p>&copy; {new Date().getFullYear()} Camaraderie | All Rights Reserved</p>
         </div>
       </div>
     </footer>

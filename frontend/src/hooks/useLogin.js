@@ -73,7 +73,7 @@ function handleInputErrors({
         toast.error("Password must be of atleast 6 characters");
         return false;
     }
-    if (mobileNo.length !== 10) {
+    if (mobileNo && mobileNo.length !== 10) {
         toast.error("Enter a valid Mobile no.");
         return false;
     }

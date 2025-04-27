@@ -59,6 +59,36 @@ export const getMyCurrentTrip = async (req: Request, res: Response) => {
     }
 }
 
+export const getTripbyId = async (req: Request, res: Response) => {
+    try {
+        const groupId = req.params.id;
+
+        const group = await Group.findById(groupId).populate([
+            {
+                path: "admin",
+                model: "User",
+                select: "_id name email profilePic"
+            },
+            {
+                path: "members",
+                model: "User",
+                select: "_id name email profilePic"
+            }
+        ]);
+
+        if (!group) {
+            res.status(400).json({ error: "Group not found" });
+            return;
+        }
+
+        res.status(200).json(group);
+    } catch (error) {
+        console.error("Error in getTripById controller:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
+
 export const getMembers = async (req: Request, res: Response) => {
     try {
         const groupId = req.params.id;

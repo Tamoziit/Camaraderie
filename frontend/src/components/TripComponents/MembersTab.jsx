@@ -2,6 +2,7 @@ import { motion } from "framer-motion"
 import { FaUser } from "react-icons/fa"
 
 const MembersTab = ({ members, adminId }) => {
+	console.log(members)
 	return (
 		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-4 overflow-hidden">
 			<span className="text-lg font-semibold">Trip Members ({members.length})</span>
@@ -12,9 +13,9 @@ const MembersTab = ({ members, adminId }) => {
 						whileHover={{ scale: 1.02 }}
 						className="flex gap-2 items-center !py-3 !px-1 bg-gray-50 hover:bg-gray-200 rounded-lg cursor-pointer !mr-4"
 					>
-						<div className="bg-blue-100 !p-2 rounded-full mr-3">
+						<div className="bg-blue-100 rounded-full mr-3">
 							{member.profilePic ? (
-								<img src={member.profilePic} alt={member.name} />
+								<img src={member.profilePic} alt={member.name} className="!h-10 !w-10 rounded-full" />
 							) : (
 								<FaUser className="text-blue-500" />
 							)}
