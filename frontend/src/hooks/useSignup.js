@@ -87,7 +87,7 @@ const useSignup = () => {
     return { loading, signup }
 }
 
-export default useSignup
+export default useSignup;
 
 
 function handleInputErrors({

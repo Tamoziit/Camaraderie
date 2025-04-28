@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ProfileTab from "../../components/home/ProfileTab";
 import useGetMyTrips from "../../hooks/useGetMyTrips";
 import useGetMyCurrentTrip from "../../hooks/useGetMyCurrentTrip"
@@ -78,11 +78,15 @@ const Home = () => {
         </div>
       </section>
 
+      <div className="flex w-full items-center justify-center">
+        <Link to="/explore-character" className="btn-primary !rounded-xl !mt-3 !bg-purple-600 hover:!bg-purple-700 !py-3">Explore your Archetype</Link>
+      </div>
+
       <section className="user-dashboard">
         <div className="container flex flex-col md:flex-row !justify-between gap-10 lg:gap-20">
           <div>
             <ProfileTab
-              trips={trips.length}
+              trips={trips?.length}
             />
           </div>
 

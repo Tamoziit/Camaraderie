@@ -47,8 +47,13 @@ export const getMyCurrentTrip = async (req: Request, res: Response) => {
             ]
         });
 
-        if (!user || !user.currentGroup) {
-            res.status(400).json({ error: "Current trip not found" });
+        if (!user) {
+            res.status(400).json({ error: "User not found" });
+            return;
+        }
+
+        if(!user.currentGroup) {
+            res.status(200).json({});
             return;
         }
 

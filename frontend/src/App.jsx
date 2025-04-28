@@ -14,6 +14,7 @@ import CurrentTrip from './pages/trips/CurrentTrip'
 import Trip from './pages/trips/Trip'
 import Search from './pages/search/Search'
 import ExploreTrip from './pages/search/ExploreTrip'
+import Questionnaire from './pages/profile/Questionnaire'
 
 function App() {
   const { authUser } = useAuthContext();
@@ -26,6 +27,7 @@ function App() {
           <Route path="/" element={authUser ? <Navigate to="/home" /> : <Landing />} />
           <Route path="/login" element={authUser ? <Navigate to="/home" /> : <Login />} />
           <Route path="/signup" element={authUser ? <Navigate to="/home" /> : <SignUp />} />
+          <Route path="/explore-character" element={authUser ? <Questionnaire /> : <Navigate to={"/"} />} />
           <Route path="/home" element={authUser ? <Home /> : <Navigate to={"/"} />} />
           <Route path="/group/create-group" element={authUser ? <CreateGroup /> : <Navigate to={"/"} />} />
           <Route path="/trips/current-trip" element={authUser ? <CurrentTrip /> : <Navigate to={"/"} />} />

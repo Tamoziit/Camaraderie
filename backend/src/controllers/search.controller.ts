@@ -41,8 +41,8 @@ export const searchGroups = async (req: Request, res: Response) => {
             const isTransportMatch = transport && transport.mode ?
                 (group.transport && group.transport.mode === transport.mode || group.transport && group.transport.name === transport.name) : true;
 
-            // Intrinsic Strength check (±1.5 tolerance)
-            const isStrengthMatch = Math.abs(group.intrinsicStrength - user.intrinsicStrength) <= 1.5;
+            // Intrinsic Strength check (±2.5 tolerance)
+            const isStrengthMatch = Math.abs(group.intrinsicStrength - user.intrinsicStrength) <= 2.5;
 
             console.log({
                 isDestinationMatch,
@@ -78,7 +78,7 @@ export const suggestions = async (req: Request, res: Response) => {
             select: "_id name email profilePic"
         });
 
-        res.status(200).json(groups);
+        res.status(200).json(groups.reverse());
     } catch (error) {
         console.log("Error in suggestions controller", error);
         res.status(500).json({ error: "Internal Server Error" });
