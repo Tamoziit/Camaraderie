@@ -78,7 +78,7 @@ const Home = () => {
         </div>
       </section>
 
-      <div className="flex w-full items-center justify-center">
+      <div className="flex w-full items-center justify-center !mb-2">
         <Link to="/explore-character" className="btn-primary !rounded-xl !mt-3 !bg-purple-600 hover:!bg-purple-700 !py-3">Explore your Archetype</Link>
       </div>
 

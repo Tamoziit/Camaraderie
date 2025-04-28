@@ -22,7 +22,8 @@ const Header = () => {
   return (
     <header className="header">
       <div className="container">
-        <div className="logo">
+        <div className="logo flex items-center justify-center gap-2">
+          <img src="/Logo.png" alt="logo" className='size-8 !-mt-1' />
           <Link to="/">
             <h1>Camaraderie</h1>
           </Link>

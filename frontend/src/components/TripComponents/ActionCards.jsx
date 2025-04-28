@@ -2,8 +2,9 @@ import { motion } from "framer-motion"
 import { TbBuildingCommunity } from "react-icons/tb"
 import { IoMdImages } from "react-icons/io"
 import { RiMoneyDollarCircleFill } from "react-icons/ri"
+import { Link } from "react-router-dom"
 
-const ActionCards = () => {
+const ActionCards = ({ id }) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 lg:gap-6 !px-4 md:!px-0">
       <ActionCard
@@ -12,6 +13,7 @@ const ActionCards = () => {
         bgGradient="from-purple-500 to-indigo-600"
         imageSrc="/community.png"
         buttonText="View Community"
+        url={`/trips/community/${id}`}
       />
 
       <ActionCard
@@ -20,6 +22,7 @@ const ActionCards = () => {
         bgGradient="from-amber-500 to-orange-600"
         imageSrc="/itinerary.png"
         buttonText="Plan Itinerary"
+        url={`/trips/itinerary/${id}`}
       />
 
       <ActionCard
@@ -28,12 +31,13 @@ const ActionCards = () => {
         bgGradient="from-emerald-500 to-green-600"
         imageSrc="/budget.png"
         buttonText="Manage Budget"
+        url={`/trips/budget-splitter/${id}`}
       />
     </div>
   )
 }
 
-const ActionCard = ({ title, icon, bgGradient, imageSrc, buttonText }) => {
+const ActionCard = ({ title, icon, bgGradient, imageSrc, buttonText, url }) => {
   return (
     <motion.div
       whileHover={{ scale: 1.05 }}
@@ -54,9 +58,9 @@ const ActionCard = ({ title, icon, bgGradient, imageSrc, buttonText }) => {
           {icon}
           <span className="font-bold text-lg lg:text-xl">{title}</span>
         </div>
-        <button className="w-full mt-2 bg-white/20 hover:bg-white/30 text-white py-2 rounded-lg transition">
+        <Link to={url} className="!w-full flex items-center justify-center !mt-2 text-white rounded-lg transition font-medium">
           {buttonText}
-        </button>
+        </Link>
       </div>
     </motion.div>
   )

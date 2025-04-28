@@ -38,16 +38,6 @@ io.on("connection", (socket) => {
             socket.to(groupId).emit("receive-message", `${userId} joined the group`);
         });
 
-        // Handle sending a message to a group
-        /*socket.on("send-message", ({ groupId, message }) => {
-            console.log(`User ${userId} sent message to group ${groupId}`);
-            io.to(groupId).emit("receive-message", {
-                groupId,
-                sender: userId,
-                message,
-                timestamp: new Date()
-            });
-        });*/
 
         socket.on("disconnect", () => {
             console.log("User disconnected", socket.id);

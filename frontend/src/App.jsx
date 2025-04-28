@@ -15,6 +15,7 @@ import Trip from './pages/trips/Trip'
 import Search from './pages/search/Search'
 import ExploreTrip from './pages/search/ExploreTrip'
 import Questionnaire from './pages/profile/Questionnaire'
+import Community from './pages/community/Community'
 
 function App() {
   const { authUser } = useAuthContext();
@@ -32,6 +33,7 @@ function App() {
           <Route path="/group/create-group" element={authUser ? <CreateGroup /> : <Navigate to={"/"} />} />
           <Route path="/trips/current-trip" element={authUser ? <CurrentTrip /> : <Navigate to={"/"} />} />
           <Route path="/trips/my-trips/:id" element={authUser ? <Trip /> : <Navigate to={"/"} />} />
+          <Route path="/trips/community/:id" element={authUser ? <Community /> : <Navigate to={"/"} />} />
           <Route path="/search" element={authUser ? <Search /> : <Navigate to={"/"} />} />
           <Route path="/search/:id" element={authUser ? <ExploreTrip /> : <Navigate to={"/"} />} />
         </Routes>

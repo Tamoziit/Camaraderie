@@ -79,7 +79,9 @@ const CurrentTrip = () => {
 						<TripDetails destination={currTrip.destination} startDate={currTrip.startDate} endDate={currTrip.endDate} />
 
 						<h3 className="text-xl font-semibold !mb-4">Quick Actions</h3>
-						<ActionCards />
+						<ActionCards
+							id={currTrip._id}
+						/>
 					</motion.div>
 				</div>
 			</div>

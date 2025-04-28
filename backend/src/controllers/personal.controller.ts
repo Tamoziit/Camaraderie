@@ -52,7 +52,7 @@ export const getMyCurrentTrip = async (req: Request, res: Response) => {
             return;
         }
 
-        if(!user.currentGroup) {
+        if (!user.currentGroup) {
             res.status(200).json({});
             return;
         }
@@ -126,11 +126,17 @@ export const getMembers = async (req: Request, res: Response) => {
 export const fetchCommunity = async (req: Request, res: Response) => {
     try {
         const groupdId = req.params.id;
-        const community = await Community.findOne({ groupdId }).populate({
-            path: "members",
-            model: User,
-            select: "_id name email profilePic"
-        });
+        const community = await Community.findOne({ groupdId })
+            .populate({
+                path: "members",
+                model: User,
+                select: "_id name email profilePic",
+            })
+            .populate({
+                path: "chats.sender",
+                model: User,
+                select: "_id name profilePic",
+            });
 
         if (!community) {
             res.status(400).json({ error: "Cannot find this trip" });
