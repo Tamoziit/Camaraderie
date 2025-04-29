@@ -156,7 +156,7 @@ const SignUp = () => {
               name="address"
               value={formData.address}
               onChange={handleChange}
-              placeholder="Enter your Aadhar no."
+              placeholder="Enter your Residential Address"
             />
           </div>
 
