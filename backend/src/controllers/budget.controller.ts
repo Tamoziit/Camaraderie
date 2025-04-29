@@ -44,7 +44,14 @@ export const updateSplitter = async (req: Request, res: Response) => {
         const updatedSplitter = calculateBudgetSplitter(
             trip.budgetSplitter.map((item: any) => item.toObject())
         );
-        res.status(200).json(updatedSplitter);
+        res.status(200).json({
+            destination: trip.destination,
+            startDate: trip.startDate,
+            endDate: trip.endDate,
+            members: trip.members,
+            intrinsicStrength: trip.intrinsicStrength,
+            budgetSplitter: updatedSplitter
+        });
     } catch (error) {
         console.error("Error in updateSplitter controller:", error);
         res.status(500).json({ error: "Internal Server Error" });
@@ -75,7 +82,14 @@ export const getSplitter = async (req: Request, res: Response) => {
         const updatedSplitter = calculateBudgetSplitter(
             trip.budgetSplitter.map((item: any) => item.toObject())
         );
-        res.status(200).json(updatedSplitter);
+        res.status(200).json({
+            destination: trip.destination,
+            startDate: trip.startDate,
+            endDate: trip.endDate,
+            members: trip.members,
+            intrinsicStrength: trip.intrinsicStrength,
+            budgetSplitter: updatedSplitter
+        });
     } catch (error) {
         console.error("Error in getSplitter controller:", error);
         res.status(500).json({ error: "Internal Server Error" });

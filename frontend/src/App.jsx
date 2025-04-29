@@ -17,6 +17,7 @@ import ExploreTrip from './pages/search/ExploreTrip'
 import Questionnaire from './pages/profile/Questionnaire'
 import Community from './pages/community/Community'
 import Itinerary from './pages/itinerary/Itinerary'
+import Budget from './pages/budget/Budget'
 
 function App() {
   const { authUser } = useAuthContext();
@@ -36,6 +37,7 @@ function App() {
           <Route path="/trips/my-trips/:id" element={authUser ? <Trip /> : <Navigate to={"/"} />} />
           <Route path="/trips/community/:id" element={authUser ? <Community /> : <Navigate to={"/"} />} />
           <Route path="/trips/itinerary/:id" element={authUser ? <Itinerary /> : <Navigate to={"/"} />} />
+          <Route path="/trips/budget-splitter/:id" element={authUser ? <Budget /> : <Navigate to={"/"} />} />
           <Route path="/search" element={authUser ? <Search /> : <Navigate to={"/"} />} />
           <Route path="/search/:id" element={authUser ? <ExploreTrip /> : <Navigate to={"/"} />} />
         </Routes>

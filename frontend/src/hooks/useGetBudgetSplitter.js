@@ -1,14 +1,14 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-const useGetItinerary = () => {
+const useGetBudgetSplitter = () => {
     const [loading, setLoading] = useState(false);
     const apiUrl = import.meta.env.VITE_API_URL;
 
-    const getItinerary = async (id) => {
+    const getSplitter = async (id) => {
         setLoading(true);
         try {
-            const res = await fetch(`${apiUrl}/api/v1/personal/itinerary/${id}`, {
+            const res = await fetch(`${apiUrl}/api/v1/budget-splitter/get-splitter/${id}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -32,7 +32,7 @@ const useGetItinerary = () => {
             setLoading(false);
         }
     }
-    return { loading, getItinerary }
+    return { loading, getSplitter }
 }
 
-export default useGetItinerary;
+export default useGetBudgetSplitter;
