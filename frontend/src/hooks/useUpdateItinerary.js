@@ -1,20 +1,29 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-const useAcceptRequest = () => {
+const useUpdateItinerary = () => {
     const [loading, setLoading] = useState(false);
     const apiUrl = import.meta.env.VITE_API_URL;
 
-    const acceptRequest = async ({ id, userId }) => {
+    const update = async ({
+        name,
+        details,
+        date,
+        id
+    }) => {
         setLoading(true);
         try {
-            const res = await fetch(`${apiUrl}/api/v1/groups/accept-request/${id}`, {
+            const res = await fetch(`${apiUrl}/api/v1/personal/itinerary/update/${id}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${localStorage.getItem("CM-token")}`
                 },
-                body: JSON.stringify({ userId })
+                body: JSON.stringify({
+                    name,
+                    details,
+                    date
+                })
             });
             const data = await res.json();
 
@@ -23,7 +32,8 @@ const useAcceptRequest = () => {
             }
 
             if (data) {
-                toast.success("Request accepted successfully");
+                toast.success("Itinerary updated successfully");
+                return data;
             }
         }
         catch (error) {
@@ -33,7 +43,7 @@ const useAcceptRequest = () => {
             setLoading(false);
         }
     }
-    return { loading, acceptRequest }
+    return { loading, update }
 }
 
-export default useAcceptRequest;
+export default useUpdateItinerary;

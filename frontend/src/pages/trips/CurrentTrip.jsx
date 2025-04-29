@@ -31,8 +31,8 @@ const itemVariants = {
 }
 
 const CurrentTrip = () => {
-	const [currTrip, setCurrTrip] = useState(null)
-	const { loading, myCurrTrip } = useGetMyCurrentTrip()
+	const [currTrip, setCurrTrip] = useState(null);
+	const { loading, myCurrTrip } = useGetMyCurrentTrip();
 
 	const fetchMyCurrTrip = async () => {
 		const data = await myCurrTrip()

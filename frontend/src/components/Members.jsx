@@ -8,6 +8,12 @@ const Members = ({ members, intrinsicStrength, admin }) => {
 		setOpenReviewId(openReviewId === id ? null : id);
 	};
 
+	const getWorkplace = (member) => {
+		if (member.profession === "student") return member.institute;
+		if (member.profession === "professional") return member.company;
+		if (member.profession === "other") return member.otherProfession;
+	}
+
 	return (
 		<div className="!pt-3">
 			<h2 className="text-2xl font-bold mb-6 !text-transparent !bg-clip-text bg-gradient-to-r from-blue-500 to-blue-900">
@@ -51,7 +57,7 @@ const Members = ({ members, intrinsicStrength, admin }) => {
 								<img
 									src={member.profilePic || "/placeholderImg.png"}
 									alt={member.name}
-									className="w-18 h-18 rounded-full object-cover object-center border"
+									className="size-22 rounded-full object-cover object-center border"
 								/>
 
 								<div className="flex flex-col -gap-1">
@@ -63,8 +69,10 @@ const Members = ({ members, intrinsicStrength, admin }) => {
 											</span>
 										)}
 									</div>
-									<p className="text-sm text-gray-500">{member.email}</p>
-									<p className="text-sm text-gray-600 font-medium">{member.totalTrips.length} Trips</p>
+
+									<p className="text-base text-gray-600 font-medium">{member.archetype} | {member.intrinsicStrength} Instrinsic Strength</p>
+									<p className="text-base text-gray-500">{member.email} | {member.gender} | {member.profession} | {getWorkplace(member)}</p>
+									<p className="text-base text-gray-600 font-medium">{member.totalTrips.length} Trips</p>
 
 									<div className="flex items-center gap-1">
 										<FaStar className="text-yellow-400" />

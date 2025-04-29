@@ -77,7 +77,7 @@ export const getTripbyId = async (req: Request, res: Response) => {
             {
                 path: "members",
                 model: "User",
-                select: "_id name email profilePic reviews totalTrips"
+                select: "-password"
             }
         ]);
 
@@ -176,7 +176,14 @@ export const getItinerary = async (req: Request, res: Response) => {
             return;
         }
 
-        res.status(200).json(trip.iternary);
+        res.status(200).json({
+            itinerary: trip.iternary,
+            destination: trip.destination,
+            startDate: trip.startDate,
+            endDate: trip.endDate,
+            members: trip.members,
+            intrinsicStrength: trip.intrinsicStrength
+        });
     } catch (error) {
         console.error("Error in getItinerary controller:", error);
         res.status(500).json({ error: "Internal Server Error" });
@@ -201,8 +208,8 @@ export const updateItinerary = async (req: Request, res: Response) => {
             res.status(400).json({ error: "Cannot find User" });
             return;
         }
-        if (trip.admin.toString() !== req.user?._id?.toString()) {
-            res.status(400).json({ error: "Only admin can update Itinerary" });
+        if (!trip.members.some((member: any) => member._id.toString() === req.user!._id!.toString())) {
+            res.status(400).json({ error: "You are not a member of this Group" });
             return;
         }
 
@@ -214,7 +221,14 @@ export const updateItinerary = async (req: Request, res: Response) => {
         trip.iternary.push(event);
         await trip.save();
 
-        res.status(201).json(trip.iternary);
+        res.status(201).json({
+            itinerary: trip.iternary,
+            destination: trip.destination,
+            startDate: trip.startDate,
+            endDate: trip.endDate,
+            members: trip.members,
+            intrinsicStrength: trip.intrinsicStrength
+        });
     } catch (error) {
         console.error("Error in updateItinerary controller:", error);
         res.status(500).json({ error: "Internal Server Error" });
@@ -251,7 +265,15 @@ export const markItineraryDone = async (req: Request, res: Response) => {
 
         itineraryItem.isDone = true;
         await trip.save();
-        res.status(200).json(trip.iternary);
+
+        res.status(200).json({
+            itinerary: trip.iternary,
+            destination: trip.destination,
+            startDate: trip.startDate,
+            endDate: trip.endDate,
+            members: trip.members,
+            intrinsicStrength: trip.intrinsicStrength
+        });
     } catch (error) {
         console.error("Error in updateItinerary controller:", error);
         res.status(500).json({ error: "Internal Server Error" });

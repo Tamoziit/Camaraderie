@@ -8,6 +8,7 @@ import { useAuthContext } from "../../context/AuthContext";
 import { FaPaperPlane } from "react-icons/fa6";
 import useSendMessage from "../../hooks/useSendMessage";
 import { useSocketContext } from "../../context/SocketContext";
+import TripHeader from "../../components/TripHeader";
 
 const Community = () => {
 	const { id } = useParams();
@@ -65,21 +66,15 @@ const Community = () => {
 	if (!trip || !community || loading || fetching) return <Spinner />;
 
 	return (
-		<div className="flex w-full h-[calc(100vh-100px)]">
+		<div className="flex w-full h-[100vh]">
 			<div className="flex flex-col w-full !m-3 rounded-lg overflow-hidden border border-blue-600 shadow-lg !z-20">
-				<div className="flex items-center justify-between !px-6 !py-2 bg-gray-200">
-					<div className="flex items-center gap-2">
-						<img src="/Logo.png" alt="Logo" className="size-10" />
-						<span className="text-lg font-medium text-gray-700">
-							{trip.destination} | {formatDate(trip.startDate)} - {formatDate(trip.endDate)}
-						</span>
-					</div>
-					<div>
-						<span className="text-lg font-medium text-gray-700">
-							{trip.members.length} members | {trip.intrinsicStrength} Intrinsic Strength
-						</span>
-					</div>
-				</div>
+				<TripHeader
+					destination={trip.destination}
+					startDate={trip.startDate}
+					endDate={trip.endDate}
+					members={trip.members.length}
+					intrinsicStrength={trip.intrinsicStrength}
+				/>
 
 				<div className="flex flex-1 overflow-hidden">
 					{/* Members List */}

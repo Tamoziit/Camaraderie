@@ -9,6 +9,7 @@ import TripDetails from "../../components/TripComponents/TripDetails";
 import ActionCards from "../../components/TripComponents/ActionCards";
 import useGetTripById from "../../hooks/useGetTripById";
 import useViewRequests from "../../hooks/useViewRequests";
+import { useAuthContext } from "../../context/AuthContext";
 
 const containerVariants = {
     hidden: { opacity: 0 },
@@ -38,6 +39,7 @@ const Trip = () => {
     const { loading, getTrip } = useGetTripById();
     const [requests, setRequets] = useState([]);
     const { loading: fetching, viewRequests } = useViewRequests();
+    const { authUser } = useAuthContext();
 
     const fetchTrip = async () => {
         const data = await getTrip(id);
@@ -45,8 +47,9 @@ const Trip = () => {
     }
 
     const fetchRequests = async () => {
+        if (authUser._id === trip.admin?._id) return;
         const data = await viewRequests(id);
-        setRequets(data)
+        setRequets(data);
     }
 
     useEffect(() => {
