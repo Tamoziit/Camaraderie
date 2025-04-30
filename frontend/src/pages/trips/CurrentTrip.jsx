@@ -7,6 +7,8 @@ import TripHeader from "../../components/TripComponents/TripHeader";
 import TripTabs from "../../components/TripComponents/TripTabs";
 import TripDetails from "../../components/TripComponents/TripDetails";
 import ActionCards from "../../components/TripComponents/ActionCards";
+import useViewRequests from "../../hooks/useViewRequests";
+import { useAuthContext } from "../../context/AuthContext";
 
 const containerVariants = {
 	hidden: { opacity: 0 },
@@ -33,15 +35,31 @@ const itemVariants = {
 const CurrentTrip = () => {
 	const [currTrip, setCurrTrip] = useState(null);
 	const { loading, myCurrTrip } = useGetMyCurrentTrip();
+	const [requests, setRequests] = useState([]);
+	const { loading: fetching, viewRequests } = useViewRequests();
+	const { authUser } = useAuthContext();
 
 	const fetchMyCurrTrip = async () => {
 		const data = await myCurrTrip()
 		setCurrTrip(data)
 	}
 
+	const fetchRequests = async () => {
+		if (authUser._id !== currTrip.admin._id) return;
+		const data = await viewRequests(currTrip._id);
+		console.log(data)
+		setRequests(data);
+	}
+
 	useEffect(() => {
-		fetchMyCurrTrip()
+		fetchMyCurrTrip();
 	}, []);
+
+	useEffect(() => {
+		if (currTrip) {
+			fetchRequests();
+		}
+	}, [currTrip]);
 
 	console.log(currTrip)
 
@@ -71,7 +89,7 @@ const CurrentTrip = () => {
 							members={currTrip.members}
 							admin={currTrip.admin}
 							transport={currTrip.transport}
-							requests={currTrip.requests}
+							requests={requests}
 						/>
 					</motion.div>
 

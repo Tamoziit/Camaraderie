@@ -47,15 +47,22 @@ const Trip = () => {
     }
 
     const fetchRequests = async () => {
-        if (authUser._id === trip.admin?._id) return;
+        if (authUser._id !== trip.admin?._id) return;
         const data = await viewRequests(id);
         setRequets(data);
     }
 
+    console.log(trip)
+
     useEffect(() => {
         fetchTrip();
-        fetchRequests();
     }, []);
+
+    useEffect(() => {
+        if (trip) {
+            fetchRequests();
+        }
+    }, [trip]);
 
     if (loading) {
         return <Spinner />

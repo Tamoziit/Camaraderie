@@ -27,6 +27,8 @@ const RequestsTab = ({ requests }) => {
 		});
 	}
 
+	console.log(requests)
+
 	return (
 		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-4">
 			<span className="text-lg font-semibold">Pending Requests</span>
@@ -46,7 +48,7 @@ const RequestsTab = ({ requests }) => {
 						<p className="text-sm text-gray-500 mt-1">{request.mobileNo}</p>
 						<p className="text-sm text-gray-500 mt-1">{request.archetype} | {request.intrinsicStrength}</p>
 
-						<p className="text-sm font-medium text-gray-600 mt-1 flex items-center gap-1">{request.totalTrips.length} Trips | <FaStar className="text-yellow-400" /> {getAvgRating()}</p>
+						<p className="text-sm font-medium text-gray-600 mt-1 flex items-center gap-1">{request.totalTrips?.length} Trips | <FaStar className="text-yellow-400" /> {getAvgRating()}</p>
 						<p className="text-xs text-gray-400 mt-2">{new Date(request.createdAt).toLocaleDateString()}</p>
 
 						<button

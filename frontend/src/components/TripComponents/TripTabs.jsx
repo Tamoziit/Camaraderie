@@ -11,6 +11,8 @@ const TripTabs = ({ members, admin, transport, requests, intrinsicStrength }) =>
 	const [activeTab, setActiveTab] = useState("members");
 	const { authUser } = useAuthContext();
 
+	console.log(requests)
+
 	return (
 		<>
 			<div className="flex items-center justify-around border-b border-gray-300 !px-2">
