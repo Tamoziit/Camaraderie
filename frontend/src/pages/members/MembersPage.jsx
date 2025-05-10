@@ -5,6 +5,8 @@ import useGetTripById from "../../hooks/useGetTripById";
 import { FaChevronDown, FaStar, FaUsers } from "react-icons/fa";
 import Spinner from "../../components/Spinner";
 import { useAuthContext } from "../../context/AuthContext";
+import FeedbackModal from "../../components/FeedbackModal";
+import usePostReview from "../../hooks/usePostReview";
 
 const MembersPage = () => {
 	const { id } = useParams();
@@ -14,6 +16,13 @@ const MembersPage = () => {
 	const [trip, setTrip] = useState(null);
 	const { loading: fetching, getTrip } = useGetTripById();
 	const { authUser } = useAuthContext();
+	const [review, setReview] = useState({
+		rating: "",
+		message: ""
+	});
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [selectedMember, setSelectedMember] = useState(null);
+	const { laoding: posting, postReview } = usePostReview();
 
 	const toggleReview = (id) => {
 		setOpenReviewId(openReviewId === id ? null : id);
@@ -35,10 +44,25 @@ const MembersPage = () => {
 		setTrip(data);
 	}
 
+	const openFeedbackModal = (member) => {
+		setSelectedMember(member);
+		setReview({ rating: "", message: "" });
+		setIsModalOpen(true);
+	}
+
 	useEffect(() => {
 		fetchTrip();
 		fetchMembers();
 	}, []);
+
+	const handleFeedbackSubmit = async () => {
+		await postReview({
+			rating: review.rating,
+			message: review.message,
+			id: selectedMember._id
+		});
+		setIsModalOpen(false);
+	}
 
 	if (loading || fetching) {
 		return (
@@ -114,7 +138,7 @@ const MembersPage = () => {
 								{hasMessageReviews && (
 									<button
 										onClick={() => toggleReview(member._id)}
-										className="flex items-center gap-2 text-blue-600 hover:text-blue-800 text-sm font-medium !ml-3"
+										className="flex items-center gap-2 text-blue-600 hover:text-blue-800 text-sm font-medium !ml-26"
 									>
 										Reviews
 										<FaChevronDown
@@ -127,19 +151,41 @@ const MembersPage = () => {
 								{openReviewId === member._id && (
 									<div className="!mt-2 border-t border-gray-400 !pt-2">
 										{member.reviews
-											.filter((review) => review.message?.trim())
 											.map((review, idx) => (
 												<div
 													key={idx}
 													className="!p-2 !mb-2"
 												>
-													<p className="text-sm text-gray-700">{review.message}</p>
+													{review.message && (<p className="text-sm text-gray-700">{review.message}</p>)}
 													<div className="flex items-center gap-1 text-yellow-500 text-sm">
 														<FaStar /> {review.rating}
 													</div>
 												</div>
 											))}
 									</div>
+								)}
+
+								{member._id !== authUser._id && (
+									<>
+										<div className="w-full flex items-center justify-center !mb-1.5">
+											<button
+												onClick={() => openFeedbackModal(member)}
+												className="btn-secondary !p-1 text-[13px]"
+											>
+												Give Feedback
+											</button>
+										</div>
+
+										<FeedbackModal
+											isOpen={isModalOpen}
+											onClose={() => setIsModalOpen(false)}
+											onSubmit={handleFeedbackSubmit}
+											review={review}
+											setReview={setReview}
+											memberName={selectedMember?.name}
+											loading={posting}
+										/>
+									</>
 								)}
 							</div>
 						);
