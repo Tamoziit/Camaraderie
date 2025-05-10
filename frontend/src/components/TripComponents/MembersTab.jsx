@@ -1,9 +1,12 @@
-import { motion } from "framer-motion"
-import { FaUser } from "react-icons/fa"
+import { motion } from "framer-motion";
+import { FaUser } from "react-icons/fa";
+import { Link, useParams } from "react-router-dom";
 
 const MembersTab = ({ members, adminId, intrinsicStrength }) => {
+	const { id } = useParams();
+
 	return (
-		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="overflow-hidden flex flex-col !mt-2">
+		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="overflow-hidden flex flex-col !mt-2 relative h-[420px]">
 			<span className="text-lg font-semibold">Trip Members ({members.length})</span>
 			<span className="text-base font-semibold text-gray-600">Intrinsic Strength: {intrinsicStrength}</span>
 
@@ -40,6 +43,10 @@ const MembersTab = ({ members, adminId, intrinsicStrength }) => {
 					<p className="text-gray-500">No members found</p>
 				</div>
 			)}
+
+			<div className="flex w-full items-center justify-center">
+				<Link to={`/trips/members/${id}`} className="absolute bottom-4 btn-secondary font-semibold !py-1">Show Members</Link>
+			</div>
 		</motion.div>
 	)
 }

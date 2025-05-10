@@ -9,7 +9,7 @@ const ActionCards = ({ id }) => {
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 lg:gap-6 !px-4 md:!px-0">
       <ActionCard
         title="Community"
-        icon={<TbBuildingCommunity className="text-3xl mr-2" />}
+        icon={<TbBuildingCommunity className="text-3xl !mr-1" />}
         bgGradient="from-purple-500 to-indigo-600"
         imageSrc="/community.png"
         buttonText="View Community"
@@ -18,7 +18,7 @@ const ActionCards = ({ id }) => {
 
       <ActionCard
         title="Itinerary"
-        icon={<IoMdImages className="text-3xl mr-2" />}
+        icon={<IoMdImages className="text-3xl !mr-1" />}
         bgGradient="from-amber-500 to-orange-600"
         imageSrc="/itinerary.png"
         buttonText="Plan Itinerary"
@@ -27,7 +27,7 @@ const ActionCards = ({ id }) => {
 
       <ActionCard
         title="Budget"
-        icon={<RiMoneyDollarCircleFill className="text-3xl mr-2" />}
+        icon={<RiMoneyDollarCircleFill className="text-3xl !mr-1" />}
         bgGradient="from-emerald-500 to-green-600"
         imageSrc="/budget.png"
         buttonText="Manage Budget"
@@ -54,11 +54,11 @@ const ActionCard = ({ title, icon, bgGradient, imageSrc, buttonText, url }) => {
       </div>
 
       <div className="!px-4 !py-1 flex flex-col items-center text-white bg-gradient-to-br from-black/30 to-transparent">
-        <div className="flex items-center gap-2 mb-2">
+        <div className="flex items-center gap-2">
           {icon}
           <span className="font-bold text-lg lg:text-xl">{title}</span>
         </div>
-        <Link to={url} className="!w-full flex items-center justify-center !mt-2 text-white rounded-lg transition font-medium">
+        <Link to={url} className="!w-full flex items-center justify-center !mt-2 text-white rounded-lg transition font-medium text-[15px]">
           {buttonText}
         </Link>
       </div>

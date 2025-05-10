@@ -3,7 +3,6 @@ import useFetchCommunity from "../../hooks/useFetchCommunity";
 import { useEffect, useState } from "react";
 import useGetTripById from "../../hooks/useGetTripById";
 import Spinner from "../../components/Spinner";
-import formatDate from "../../utils/formatDate";
 import { useAuthContext } from "../../context/AuthContext";
 import { FaPaperPlane } from "react-icons/fa6";
 import useSendMessage from "../../hooks/useSendMessage";

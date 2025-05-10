@@ -90,6 +90,7 @@ const CurrentTrip = () => {
 							admin={currTrip.admin}
 							transport={currTrip.transport}
 							requests={requests}
+							intrinsicStrength={currTrip.intrinsicStrength}
 						/>
 					</motion.div>
 

@@ -99,7 +99,7 @@ const Home = () => {
                 currTrip ? (
                   <TripCard
                     trip={currTrip}
-                    url={`${baseUrl}/trips/current-trip`}
+                    url={`${baseUrl}/trips/current-trip/${currTrip._id}`}
                   />
                 ) : (
                   <div>
