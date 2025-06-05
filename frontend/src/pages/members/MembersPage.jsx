@@ -72,10 +72,21 @@ const MembersPage = () => {
 		)
 	}
 
+	console.log(trip)
+
 	return (
 		<div className="flex flex-col items-center justify-center w-full !p-4">
 			<span className="text-4xl font-bold !text-transparent !bg-clip-text bg-gradient-to-r from-blue-500 to-blue-900 !mb-4">Explore Members</span>
-			<div className="h-[0.5px] !bg-gray-400 !mb-7 !z-10 w-full" />
+			<div className="h-[0.5px] !bg-gray-400 !mb-4 !z-10 w-full" />
+
+			<div className="w-full !px-5">
+				<span className="font-semibold text-lg text-gray-700">Group Preferences</span>
+				<div className="flex flex-wrap gap-2 items-center !w-full !mb-7 !mt-1">
+					{trip?.preferences?.map((preference, _idx) => (
+						<span className="interest-tag" key={_idx}>{preference?.tag}  × {preference?.frequency}</span>
+					))}
+				</div>
+			</div>
 
 			{members.length > 0 && trip ? (
 				<div className="flex flex-col w-full gap-3">

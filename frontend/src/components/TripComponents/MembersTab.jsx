@@ -25,13 +25,13 @@ const MembersTab = ({ members, adminId, intrinsicStrength }) => {
 							)}
 						</div>
 						<div className="flex flex-col">
-							<div className="flex gap-2 items-center">
+							<div className="flex gap-1 items-center">
 								<p className="font-medium !text-sm">{member.name}</p>
 								{member._id === adminId && (
-									<span className="bg-blue-100 text-blue-800 text-[11px] px-2 py-1 rounded-full">Admin</span>
+									<span className="bg-blue-100 text-blue-800 text-[11px] px-2 py-1 rounded-full translate-y-0.5">Admin</span>
 								)}
 							</div>
-							<p className="text-xs text-gray-500 break-words">{member.email}</p>
+							<p className="text-xs text-gray-500 break-words hidden lg:block">{member.email}</p>
 						</div>
 					</motion.div>
 				))
